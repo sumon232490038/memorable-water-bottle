@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Bottle from "../Bottle/Bottle";
 import "./Bottles.css";
-import { addCard, getStoredCart } from "../../utilities/bottleLs";
+import { addCard, getStoredCart, removeCard } from "../../utilities/bottleLs";
 import Card from "../Card/Card";
 
 const Bottles = () => {
@@ -32,10 +32,16 @@ const Bottles = () => {
     setCard(newCard);
     addCard(bottle.id);
   };
+  const handleRemoveID = (id) => {
+    const remaning = card.filter((bottle) => bottle.id !== id);
+    setCard(remaning);
+    removeCard(id);
+  };
+
   return (
     <div>
       <h2>Bottles Available: {bottles.length}</h2>
-      <Card card={card}></Card>
+      <Card card={card} handleRemoveID={handleRemoveID}></Card>
       <div className="bottles">
         {bottles.map((bottle) => (
           <Bottle

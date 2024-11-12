@@ -16,4 +16,10 @@ const addCard = (id) => {
   saveCard(card);
 };
 
-export { addCard, getStoredCart };
+const removeCard = (id) => {
+  const card = getStoredCart();
+  const remaning = card.filter((idx) => idx !== id);
+  saveCard(remaning);
+};
+
+export { addCard, getStoredCart, removeCard };
